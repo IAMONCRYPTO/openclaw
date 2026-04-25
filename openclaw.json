@@ -1,15 +1,11 @@
 {
-  "default_model": "google/gemma-2-2b-it",
-  "providers": {
-    "nvidia": {
-      "apiKey": "${NVIDIA_API_KEY}",
-      "baseURL": "https://integrate.api.nvidia.com/v1"
-    }
+  "agent": {
+    "workspace": "~/.openclaw/workspace",
+    "model": "openai/google/gemma-2-2b-it"
   },
-  "channels": [
-    {
-      "type": "telegram",
-      "token": "${TELEGRAM_TOKEN}"
+  "channels": {
+    "telegram": {
+      "botToken": "${TELEGRAM_BOT_TOKEN}"
     }
-  ]
+  }
 }
