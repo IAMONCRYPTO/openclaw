@@ -1,13 +1,11 @@
 const { execSync } = require("child_process");
+const fs = require("fs");
 
-console.log("Installing OpenClaw...");
 execSync("npm install -g openclaw@latest", { stdio: "inherit" });
 
-console.log("Running OpenClaw gateway...");
-try {
-  execSync("openclaw gateway run", { stdio: "inherit" });
-} catch(e) {
-  console.log("Gateway output:", e.message);
-  // Keep process alive
-  setInterval(() => {}, 1000);
-}
+// Create config directory
+fs.mkdirSync("/root/.openclaw", { recursive: true });
+fs.copyFileSync("openclaw.json", "/root/.openclaw/openclaw.json");
+
+console.log("Starting OpenClaw foreground...");
+execSync("openclaw gateway foreground", { stdio: "inherit" });
