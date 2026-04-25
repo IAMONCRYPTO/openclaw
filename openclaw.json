@@ -1,7 +1,14 @@
 {
   "model": {
-    "provider": "anthropic",
-    "model": "claude-haiku-4-5-20251001"
+    "provider": "openai",
+    "baseURL": "https://integrate.api.nvidia.com/v1",
+    "model": "google/gemma-2-2b-it",
+    "apiKey": "${NVIDIA_API_KEY}"
   },
-  "channels": []
+  "channels": [
+    {
+      "type": "telegram",
+      "token": "${TELEGRAM_TOKEN}"
+    }
+  ]
 }
