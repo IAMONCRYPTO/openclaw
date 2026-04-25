@@ -1,16 +1,25 @@
-const { execSync } = require("child_process");
+const { execSync, spawnSync } = require("child_process");
 const fs = require("fs");
 
 console.log("Installing OpenClaw...");
 execSync("npm install -g openclaw@latest", { stdio: "inherit" });
 
-// Create config directory and copy config
+// Write config
 fs.mkdirSync("/root/.openclaw", { recursive: true });
-fs.copyFileSync("openclaw.json", "/root/.openclaw/openclaw.json");
+fs.writeFileSync("/root/.openclaw/openclaw.json", JSON.stringify({
+  agent: {
+    workspace: "/root/.openclaw/workspace",
+    model: "openai/google/gemma-2-2b-it"
+  },
+  channels: {
+    telegram: {
+      botToken: process.env.TELEGRAM_BOT_TOKEN
+    }
+  }
+}));
 
 console.log("Starting OpenClaw...");
-// Run gateway in foreground mode for containers
-execSync("openclaw gateway", { 
+spawnSync("openclaw", ["gateway"], { 
   stdio: "inherit",
-  env: { ...process.env, OPENCLAW_NO_DAEMON: "1" }
+  shell: true
 });
