@@ -1,9 +1,10 @@
 {
-  "model": {
-    "provider": "openai",
-    "baseURL": "https://integrate.api.nvidia.com/v1",
-    "model": "google/gemma-2-2b-it",
-    "apiKey": "${NVIDIA_API_KEY}"
+  "default_model": "google/gemma-2-2b-it",
+  "providers": {
+    "nvidia": {
+      "apiKey": "${NVIDIA_API_KEY}",
+      "baseURL": "https://integrate.api.nvidia.com/v1"
+    }
   },
   "channels": [
     {
