@@ -1,0 +1,7 @@
+const { execSync } = require("child_process");
+
+console.log("Installing OpenClaw...");
+execSync("npm install -g openclaw@latest", { stdio: "inherit" });
+
+console.log("Starting OpenClaw gateway...");
+execSync("openclaw gateway start", { stdio: "inherit" });
